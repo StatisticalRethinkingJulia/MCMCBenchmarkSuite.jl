@@ -1,4 +1,4 @@
-using Documenter, MCMCBenchmarks
+using Documenter, MCMCBenchmarkSuite
 
 function add_image(folder,file)
     mkpath("docs/build/benchmarks/images/"*folder)
@@ -12,13 +12,9 @@ makedocs(
     format = :html,
     clean = true,
     authors = "Christopher R. Fisher, Rob J Goedman",
-    sitename = "StatisticalRethinkingJulia/MCMCBenchmarks.jl",
+    sitename = "StatisticalRethinkingJulia/MCMCBenchmarkSuite.jl",
     pages = Any[
         "Home"=>"index.md",
-        "Purpose"=>"purpose.md",
-        "Design"=>"design.md",
-        "Functions"=>"functions.md",
-        "Example"=>"example.md",
         "Benchmark Results"=>"benchmarks.md"
         ]
 )
@@ -39,5 +35,5 @@ files = ["summary_time.png","summary_allocations.png","density_mu_ess.png",
 
 
 deploydocs(
-    repo = "github.com/StatisticalRethinkingJulia/MCMCBenchmarks.jl.git",
+    repo = "github.com/StatisticalRethinkingJulia/MCMCBenchmarkSuite.jl.git",
 )
