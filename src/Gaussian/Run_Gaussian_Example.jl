@@ -1,4 +1,4 @@
-using Revise, MCMCBenchmarks, Distributed
+using MCMCBenchmarkSuite, Distributed
 setprocs(4)
 
 ProjDir = @__DIR__
@@ -6,18 +6,18 @@ cd(ProjDir)
 
 isdir("tmp") && rm("tmp", recursive=true)
 mkdir("tmp")
-!isdir("results") && mkdir("results")d
+!isdir("results") && mkdir("results")
 
 path = pathof(MCMCBenchmarkSuite)
 @everywhere begin
-  using MCMCBenchmarks, Revise
+  using MCMCBenchmarkSuite, Revise
   # Model and configuration patterns for each sampler are located in a
   # seperate model file.
-  include(joinpath($path))
+  include(joinpath($path, "../Gaussian/Gaussian_Models.jl"))
 end
 
 # Run this on primary processor to create tmp folder
-include(joinpath(path, "Gaussian_Models.jl"))
+include(joinpath(path, "../Gaussian/Gaussian_Models.jl"))
 
 @everywhere Turing.turnprogress(false)
 

@@ -1,4 +1,4 @@
-using MCMCBenchmarks, Distributed
+using MCMCBenchmarkSuite, Distributed
 setprocs(4)
 
 ProjDir = @__DIR__
@@ -7,18 +7,18 @@ cd(ProjDir)
 isdir("tmp") && rm("tmp", recursive=true)
 mkdir("tmp")
 !isdir("results") && mkdir("results")
-path = pathof(MCMCBenchmarks)
+path = pathof(MCMCBenchmarkSuite)
 @everywhere begin
-  using MCMCBenchmarks
+  using MCMCBenchmarkSuite
   #Model and configuration patterns for each sampler are located in a
   #seperate model file.
-  include(joinpath($path, "../../Models/LBA/LBA_Models.jl"))
-  include(joinpath($path, "../../Models/LBA/LinearBallisticAccumulator.jl"))
+  include(joinpath($path, "../LBA/LBA_Models.jl"))
+  include(joinpath($path, "../LBA/LinearBallisticAccumulator.jl"))
 end
 
 #run this on primary processor to create tmp folder
-include(joinpath(path, "../../Models/LBA/LBA_Models.jl"))
-include(joinpath(path, "../../Models/LBA/LinearBallisticAccumulator.jl"))
+include(joinpath(path, "../LBA/LBA_Models.jl"))
+include(joinpath(path, "../LBA/LinearBallisticAccumulator.jl"))
 
 @everywhere turnprogress(false)
 #set seeds on each processor

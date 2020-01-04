@@ -1,4 +1,5 @@
 module MCMCBenchmarkSuite
-  using MCMCBenchmarks
+  using Reexport
+  @reexport using MCMCBenchmarks
 
 end

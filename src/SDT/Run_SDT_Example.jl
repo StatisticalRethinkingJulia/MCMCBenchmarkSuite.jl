@@ -1,4 +1,4 @@
-using MCMCBenchmarks,Distributed
+using MCMCBenchmarkSuite, Distributed
 setprocs(4)
 
 ProjDir = @__DIR__
@@ -7,16 +7,16 @@ cd(ProjDir)
 isdir("tmp") && rm("tmp", recursive=true)
 mkdir("tmp")
 !isdir("results") && mkdir("results")
-path = pathof(MCMCBenchmarks)
+path = pathof(MCMCBenchmarkSuite)
 @everywhere begin
-  using MCMCBenchmarks
+  using MCMCBenchmarkSuite
   #Model and configuration patterns for each sampler are located in a
   #seperate model file.
-  include(joinpath($path, "SDT.jl"))
-  include(joinpath($path, "SDT_Functions.jl"))
+  include(joinpath($path, "../SDT/SDT.jl"))
+  include(joinpath($path, "../SDT/SDT_Functions.jl"))
 end
-include(joinpath(path, "SDT.jl"))
-include(joinpath(path, "SDT_Functions.jl"))
+include(joinpath(path, "../SDT/SDT.jl"))
+include(joinpath(path, "../SDT/SDT_Functions.jl"))
 #Model and configuration patterns for each sampler are located in a
 #seperate model file.
 

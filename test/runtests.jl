@@ -1,6 +1,16 @@
-using MCMCBenchmarkSuite
-using Test
+using MCMCBenchmarkSuite, Test, Random
+Random.seed!(4504)
+tests = [
+    "generative_model_tests",
+    "Gaussian_Tests",
+    "SDT_Tests",
+    "Poisson_Test",
+    "Regression_Tests",
+    #"LBA_Tests"
+]
 
-@testset "MCMCBenchmarkSuite.jl" begin
-    # Write your own tests here.
+res = map(tests) do t
+    @eval module $(Symbol("Test_", t))
+        include($t * ".jl")
+    end
 end

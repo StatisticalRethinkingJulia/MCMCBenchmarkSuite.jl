@@ -1,4 +1,4 @@
-using Revise,MCMCBenchmarks,Distributed
+using MCMCBenchmarkSuite, Distributed
 setprocs(4)
 
 ProjDir = @__DIR__
@@ -7,16 +7,16 @@ cd(ProjDir)
 isdir("tmp") && rm("tmp", recursive=true)
 mkdir("tmp")
 !isdir("results") && mkdir("results")
-path = pathof(MCMCBenchmarks)
+path = pathof(MCMCBenchmarkSuite)
 @everywhere begin
-  using MCMCBenchmarks
+  using MCMCBenchmarkSuite
   #Model and configuration patterns for each sampler are located in a
   #seperate model file.
-  include(joinpath($path, "Linear_Regression_Models.jl"))
+  include(joinpath($path, "../Linear_Regression/Linear_Regression_Models.jl"))
 end
 
 #run this on primary processor to create tmp folder
-include(joinpath(path, "Linear_Regression_Models.jl"))
+include(joinpath(path, "../Linear_Regression/Linear_Regression_Models.jl"))
 
 @everywhere Turing.turnprogress(false)
 #set seeds on each processor
