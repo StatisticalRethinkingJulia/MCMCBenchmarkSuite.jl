@@ -35,7 +35,7 @@ model {
 }
 "
 
-CmdStanConfig = Stanmodel(name="CmdStan_SDT", model=CmdStan_SDT, nchains=1,
+CmdStanConfig = Stanmodel(name="CmdStan_SDT", model=CmdStan_SDT, nchains=1, output_format=:mcmcchains,
    Sample(num_samples=1000, num_warmup=1000, adapt=CmdStan.Adapt(delta=0.8),
    save_warmup=true))
 
