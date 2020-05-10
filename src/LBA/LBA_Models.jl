@@ -180,7 +180,7 @@ function sampleDHMC(data, N, Nc, nsamples, autodiff)
     results = mcmc_with_warmup(Random.GLOBAL_RNG, ∇P, nsamples;
         q = zeros(n), p = ones(n),reporter = NoProgressReport())
     # Undo the transformation to obtain the posterior from the chain.
-    posterior = transform.(trans, results.chain)
+    posterior = TransformVariables.transform.(trans, results.chain)
     chns = nptochain(results, posterior)
     return chns
 end

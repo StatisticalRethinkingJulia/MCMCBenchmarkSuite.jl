@@ -29,7 +29,7 @@ for (i,seed) in enumerate(seeds)
 end
 
 # Create a sampler object or a tuple of sampler objects
-samplers=(
+samplers = (
   CmdStanNUTS(CmdStanConfig, ProjDir),
   AHMCNUTS(AHMCpoisson, AHMCconfig),
   #DHMCNUTS(sampleDHMC),

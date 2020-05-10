@@ -63,7 +63,7 @@ CmdStanConfig = Stanmodel(name="CmdStan_SDT", model=CmdStan_SDT, nchains=1, outp
     # Sample from the posterior.
     results = mcmc_with_warmup(Random.GLOBAL_RNG, ∇P, nsamples; reporter = NoProgressReport())
     # Undo the transformation to obtain the posterior from the chain.
-    posterior = transform.(trans, results.chain)
+    posterior = TransformVariables.transform.(trans, results.chain)
     chns = nptochain(results, posterior)
     return chns
   end
