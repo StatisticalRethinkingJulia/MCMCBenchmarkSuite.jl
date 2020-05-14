@@ -30,6 +30,7 @@ end
 
 # Create a sampler object or a tuple of sampler objects
 samplers=(
+  CmdStanNUTS(CmdStanConfig, ProjDir),
   AHMCNUTS(AHMCpoisson, AHMCconfig),
   #DHMCNUTS(sampleDHMC),
 )

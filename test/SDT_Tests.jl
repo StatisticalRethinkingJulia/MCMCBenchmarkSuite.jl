@@ -17,15 +17,14 @@ using MCMCBenchmarkSuite, Test, Random
         DHMCNUTS(sampleDHMC)
         )
     options = (Nsamples=2000, Nadapt=1000, delta=.8, Nd=Nd)
-    @test_skip results = benchmark(samplers, simulateSDT, Nreps; options...)
-    @test_skip results[!,:d_mean][results[!,:sampler] .== :AHMCNUTS,:][1] ≈ d atol = .05
-    @test_skip results[!,:d_mean][results[!,:sampler] .== :CmdStanNUTS,:][1] ≈ d atol = .05
-    @test_skip results[!,:d_mean][results[!,:sampler] .== :DHMCNUTS,:][1] ≈ d atol = .05
-    @test_skip results[!,:c_mean][results[!,:sampler] .== :AHMCNUTS,:][1] ≈ c atol = .05
-    @test_skip results[!,:c_mean][results[!,:sampler] .== :CmdStanNUTS,:][1] ≈ c atol = .05
-    @test_skip results[!,:c_mean][results[!,:sampler] .== :DHMCNUTS,:][1] ≈ c atol = .05
-    @test_skip results[!,:d_sampler_rhat][1] ≈ 1 atol = .03
-    @test_skip results[!,:c_sampler_rhat][1] ≈ 1 atol = .03
+    results = benchmark(samplers, simulateSDT, Nreps; options...)
+    @test results[!,:d_mean][results[!,:sampler] .== :AHMCNUTS,:][1] ≈ d atol = .05
+    @test results[!,:d_mean][results[!,:sampler] .== :CmdStanNUTS,:][1] ≈ d atol = .05
+    @test results[!,:d_mean][results[!,:sampler] .== :DHMCNUTS,:][1] ≈ d atol = .05
+    @test results[!,:c_mean][results[!,:sampler] .== :AHMCNUTS,:][1] ≈ c atol = .05
+    @test results[!,:c_mean][results[!,:sampler] .== :CmdStanNUTS,:][1] ≈ c atol = .05
+    @test results[!,:c_mean][results[!,:sampler] .== :DHMCNUTS,:][1] ≈ c atol = .05
+    @test results[!,:d_sampler_rhat][1] ≈ 1 atol = .03
+    @test results[!,:c_sampler_rhat][1] ≈ 1 atol = .03
     isdir("tmp") && rm("tmp", recursive=true)
-    println("Skipping tests due to error in https://github.com/TuringLang/Turing.jl/issues/1055")
 end
